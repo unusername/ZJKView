@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:countdown="http://schemas.android.com/com.zjk.zjkview"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <com.zjk.zjkview.myview.CountDownTextView
+        android:layout_width="match_parent"
+        android:layout_height="25dp"
+        app:countdownText="sdfsdfsdf"
+        app:countdownTextSize="16dp"
+        android:id="@+id/countdown_textView"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true" />
+
+</RelativeLayout>
