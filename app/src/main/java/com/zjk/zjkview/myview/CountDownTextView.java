@@ -21,6 +21,8 @@ public class CountDownTextView extends View {
 
     private final int COUNTDOWN = 1;
 
+    private boolean setTimeFlag = true;
+
     /*
     * 文本*/
     private String countdownText;
@@ -34,6 +36,11 @@ public class CountDownTextView extends View {
     /*控件所占空间大小*/
     private Rect mBond;
     private Paint mPaint;
+
+    private int id;//设置的该TextView的标示
+    private int second;
+
+    private CountDownListener listener;//倒计时停止监听器
 
     private CountDownThread thread;
     private Handler mhanler = new Handler(){
@@ -57,6 +64,8 @@ public class CountDownTextView extends View {
 
     public CountDownTextView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
+        CountDownThread thread = new CountDownThread();
+        thread.start();
         TypedArray a = context.getTheme().obtainStyledAttributes(attrs, R.styleable.CountDownTextView
         ,defStyleAttr,0);
         int n = a.getIndexCount();
@@ -118,8 +127,8 @@ public class CountDownTextView extends View {
                 height = Math.min(size,specSize);
                 break;
         }
-        setMeasuredDimension(width,height);
-        Log.e(width+"",height+"");
+        setMeasuredDimension(width, height);
+//        Log.e(width+"",height+"");
     }
 
     @Override
@@ -127,14 +136,25 @@ public class CountDownTextView extends View {
         super.onDraw(canvas);
         mPaint.setColor(countdownTextColor);
         canvas.drawText(countdownText, getWidth() / 2 - mBond.width() / 2,
-                getHeight() / 2 + mBond.height()/2, mPaint);
-        Log.e(getHeight()+"", getWidth() + "");
+                getHeight() / 2 + mBond.height() / 2, mPaint);
+//        Log.e(getHeight()+"", getWidth() + "");
     }
 
     public void setTime(int second){
-        CountDownThread thread = new CountDownThread();
-        thread.time = second;
-        thread.start();
+        Log.e(id+"",setTimeFlag+"");
+        if (setTimeFlag) {
+            this.second = second;
+            setTimeFlag = false;
+        }
+    }
+
+    public void setText(String text){
+        countdownText = text;
+        postInvalidate();
+    }
+
+    public int getTime(){
+        return second;
     }
 
     private boolean countDown(int second){
@@ -170,14 +190,15 @@ public class CountDownTextView extends View {
     }
 
     class CountDownThread extends Thread{
-        int time;
+
         @Override
         public void run() {
             while (true){
                 try {
                     sleep(1000);
-                    time--;
-                    if (!countDown(time)){
+                    second--;
+                    if (!countDown(second)){
+                        listener.onCountDownStop(id,CountDownTextView.this);
                         continue;
                     }
                 } catch (InterruptedException e) {
@@ -186,6 +207,23 @@ public class CountDownTextView extends View {
             }
 
         }
+    }
+
+    public void setCountDownID(int id){
+        this.id = id;
+    }
+
+    public void setOnCountDownListener(
+            CountDownListener listener
+    ){
+        this.listener = listener;
+    }
+
+    public interface CountDownListener{
+        /*
+        * 倒计时停止调用
+        * @param 设置过的该TextView的标示*/
+        void onCountDownStop(int id,CountDownTextView textView);
     }
 
 }

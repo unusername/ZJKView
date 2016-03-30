@@ -2,6 +2,8 @@ package com.zjk.zjkview.activity;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.EditText;
 import android.widget.ListView;
 
 import com.zjk.zjkview.R;
@@ -10,7 +12,7 @@ import com.zjk.zjkview.adapter.CountDownListAdapter;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CountDownActivity extends Activity {
+public class CountDownActivity extends Activity{
 
     private ListView listView;
     private CountDownListAdapter adapter;
@@ -36,5 +38,4 @@ public class CountDownActivity extends Activity {
         list.add(560);
         list.add(50);
     }
-
 }
