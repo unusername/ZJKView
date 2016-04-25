@@ -6,4 +6,16 @@
         <attr name="countdownTextColor" format="color"/>
         <attr name="countdownTextSize" format="dimension"/>
     </declare-styleable>
+    <declare-styleable name="CustomRatingBar">
+        <attr name="CustomRatingBarFullImage" format="reference"/>
+        <attr name="CustomRatingBarHalfImage" format="reference"/>
+        <attr name="CustomRatingBarNullImage" format="reference"/>
+        <attr name="CustomRatingBarinterval" format="dimension"/>
+    </declare-styleable>
+    <declare-styleable name="LoopChooseView">
+        <attr name="LoopChooseViewTextSize" format="dimension"/>
+        <attr name="LoopChooseViewCenterColor" format="color"/>
+        <attr name="LoopChooseViewOuterColor" format="color"/>
+        <attr name="LoopChooseViewLinePadding" format="dimension"/>
+    </declare-styleable>
 </resources>

@@ -43,6 +43,16 @@ public class MainActivity extends Activity {
                         intent.setClass(MainActivity.this,CountDownActivity.class);
                         startActivity(intent);
                         break;
+                    case 1:
+                        Intent intent1 = new Intent();
+                        intent1.setClass(MainActivity.this, RattingBarActivity.class);
+                        startActivity(intent1);
+                        break;
+                    case 2:
+                        Intent intent2 = new Intent();
+                        intent2.setClass(MainActivity.this,LoopViewActivity.class);
+                        startActivity(intent2);
+                        break;
                 }
             }
         });
@@ -51,6 +61,8 @@ public class MainActivity extends Activity {
     private void initList(){
         list = new ArrayList<>();
         list.add("倒计时TextView");
+        list.add("自定义RattingBar");
+        list.add("自定义滚轮选择器");
     }
 
 
